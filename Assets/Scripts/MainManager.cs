@@ -9,10 +9,11 @@ public class MainManager : MonoBehaviour
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
-    public static MainManager Instance;
+    //public static MainManager Instance;
 
     public Text ScoreText;
     public GameObject GameOverText;
+    public Text PlayerText;
     
     private bool m_Started = false;
     private int m_Points;
@@ -42,6 +43,10 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        //TO DO: Load name
+
+        PlayerText.text = "Best Score : ";
 
 
     }
