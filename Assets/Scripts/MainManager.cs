@@ -9,6 +9,7 @@ public class MainManager : MonoBehaviour
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
+    public static MainManager Instance;
 
     public Text ScoreText;
     public GameObject GameOverText;
@@ -17,8 +18,13 @@ public class MainManager : MonoBehaviour
     private int m_Points;
     
     private bool m_GameOver = false;
+    public string Name;
+    public int topScore;
 
-    
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +42,8 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+
     }
 
     private void Update()
