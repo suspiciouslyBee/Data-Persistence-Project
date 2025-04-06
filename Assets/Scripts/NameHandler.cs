@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using TMPro;
 
 public class NameHandler : MonoBehaviour
 {
@@ -18,8 +19,9 @@ public class NameHandler : MonoBehaviour
     }
 
     //Set the name and score, then move to the next scene
-    void InitName(string newName)
+    public void InitName(string newName)
     {
+
         Name = newName;
         Score = 0;
         SceneManager.LoadScene(1);
@@ -39,19 +41,8 @@ public class NameHandler : MonoBehaviour
 
 
     //Save and load methods
-    
-    
-    //Only Call when the score is greater
-    public void SaveScore()
-    {
-        SaveData data = new SaveData();
-        data.Name = Name;
-        data.Score = Score;
 
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-    }
-
+    
     public void LoadScore()
     {
         string path = Application.persistentDataPath + "/savefile.json";
@@ -64,5 +55,19 @@ public class NameHandler : MonoBehaviour
             Score = data.Score;
         }
     }
+
+
+    //Only Call when the score is greater
+    public void SaveScore()
+    {
+        SaveData data = new SaveData();
+        data.Name = Name;
+        data.Score = Score;
+
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
+
+
 
 }

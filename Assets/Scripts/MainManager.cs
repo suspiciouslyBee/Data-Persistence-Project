@@ -9,7 +9,6 @@ public class MainManager : MonoBehaviour
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
-    //public static MainManager Instance;
 
     public Text ScoreText;
     public GameObject GameOverText;
@@ -21,9 +20,6 @@ public class MainManager : MonoBehaviour
     private bool m_GameOver = false;
     public string Name;
     public int topScore;
-
-
-
 
 
     // Start is called before the first frame update
@@ -44,9 +40,17 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        //TO DO: Load name
+        //Save a copy of the user entered name
+        Name = NameHandler.Instance.Name;
 
-        PlayerText.text = "Best Score : ";
+        //replace it with the file
+        NameHandler.Instance.LoadScore();
+
+        PlayerText.text = "Best Score : " + NameHandler.Instance.Name + " : " +
+           NameHandler.Instance.Score;
+
+
+        
 
 
     }
@@ -70,7 +74,7 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(0);
             }
         }
     }
@@ -85,5 +89,15 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+
+        if(m_Points > NameHandler.Instance.Score)
+        {
+            NameHandler.Instance.Name = Name;
+            NameHandler.Instance.Score = m_Points;
+            NameHandler.Instance.SaveScore();
+        }
+
     }
+
+
 }
